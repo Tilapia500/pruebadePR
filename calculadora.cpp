@@ -13,7 +13,7 @@ Reset del color al final:
 */
 #include <iostream>
 #include <windows.h>
-#include<string>
+#include <string>
 using namespace std;
  
 void gotoxy(int x, int y) {
@@ -25,47 +25,84 @@ void setColor(int color) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),color);
 
 }
-int i;
-int j;
-const int MAX_ALUMNOS = 100;
-const int NUM_EXAMENES = 5;
+
+int alumnos;
+const int examenes = 5;
 
 int main(){ 
-    
-    string nombres[MAX_ALUMNOS];
-    string apellidos1[MAX_ALUMNOS];
-    string apellidos2[MAX_ALUMNOS];
-    int ciclos[MAX_ALUMNOS];
-    int cedulas[MAX_ALUMNOS];
-    float notas[MAX_ALUMNOS][NUM_EXAMENES];
-    float promedios[MAX_ALUMNOS];
-    bool aprobados[MAX_ALUMNOS];
+system("clear");
+gotoxy(50,0);
+setColor(3);
+cout << "Sistema De Calificaciones" << endl;
+setColor(3);
+cout << "=============================================================================================================================" << endl;
+       
+gotoxy(0,3);
+setColor(3);
+cout << "¿cuantos alumnos decea evaluar?";
+system("clear");
+setColor(7);
+cin >> alumnos;
+cin.ignore(); // Limpiar buffer
 
+    // Declarar arreglos para los datos de los alumnos
+string nombres[alumnos];
+string apellido1[alumnos];
+string apellido2[alumnos];
+string cedulas[alumnos];
+string cursos[alumnos];
+int notas[alumnos][examenes];
 
-    cout << "\033[2J\033[H";
-
-    gotoxy(50,0);
-    setColor(3);
-    cout << "Sistema De Calificaciones" << endl;
-    
-    setColor(3);
-    cout << "=======================================================================================================================================" << endl;
-        gotoxy(0,3);
+    // Ingresar los datos de cada alumno
+    for(int i = 0; i < alumnos; i++) {
         setColor(3);
-        cout << "¿cuantos alumnos decea evaluar?";
+        cout << "Alumno " << i+1 << endl;
+        cout << "Nombre: ";
         setColor(7);
-        cin >> i;
-        cin.ignore(); // Limpiar el buffer para getline
-
-        for (int j = 0; j < i; j++) {
+        getline(cin, nombres[i]);
+        setColor(3);
+        cout << "Primer apellido: ";
+        setColor(7);
+        getline(cin, apellido1[i]);
+        setColor(3);
+        cout << "Segundo apellido: ";
+        setColor(7);
+        getline(cin, apellido2[i]);
+        setColor(3);
+        cout << "Cedula: ";
+        setColor(7);
+        getline(cin, cedulas[i]);
+        setColor(3);
+        cout << "cursos: ";
+        setColor(7);
+        getline(cin, cursos[i]);
+        setColor(3);
+        cout << "Ingrese las notas de los 5 examenes:" << endl;
+        for(int j = 0; j < examenes; j++) {
             setColor(3);
-            cout << "Nombre del alumno " << (j + 1) << ": ";
+            cout << "Nota del examen " << j+1 << ": ";
             setColor(7);
-            getline(cin, nombres[j]);
+            cin >> notas[i][j];
         }
+        cin.ignore(); // Limpiar buffer antes del siguiente getline
+        system("clear");
+    }
+
+    // Mostrar los datos de cada alumno
+    for(int i = 0; i < alumnos; i++) {
+       
+        for(int j = 0; j < examenes; j++) {
+            
+        }
+        setColor(3);
+        cout << "Alumno #" << i+1 << endl;
+        cout << "Nombre completo: " << nombres[i] << " " << apellido1[i] << " " << apellido2[i] << endl;
+        cout << "Cedula: " << cedulas[i] << endl;
+        cout << "cursos: " << cursos[i] << endl;
+    }
 
     system("pause");
-    cout << "\033[2J\033[H";
+    system("clear");
     
     return 0;
 }
